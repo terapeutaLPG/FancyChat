@@ -31,8 +31,23 @@ public class ChatListener implements Listener {
         String msgColor = plugin.getRankValue(rank, "message-color");
 
         String message = plugin.escapeIfNoPerm(event.getMessage(), player);
-        String format = plugin.colorize(prefix + nameColor + "%1$s" + "&r: " + msgColor + "%2$s");
+        String format;
 
+        String gradStart = plugin.getRankValue(rank, "gradient-start");
+        String gradMid = plugin.getRankValue(rank, "gradient-mid");
+        String gradEnd = plugin.getRankValue(rank, "gradient-end");
+        if (GradientUtil.isHexColor(gradStart) && GradientUtil.isHexColor(gradEnd)) {
+            if (!GradientUtil.isHexColor(gradMid)) {
+                gradMid = gradEnd;
+            }
+            String gradientName = GradientUtil.applyGradient(player.getName(), gradStart, gradMid, gradEnd);
+            format = plugin.colorize(prefix) + gradientName
+                    + plugin.colorize("&r: " + msgColor) + "%2$s";
+        } else {
+            format = plugin.colorize(prefix + nameColor + "%1$s" + "&r: " + msgColor + "%2$s");
+        }
+
+        event.setMessage(message);
         event.setFormat(format);
     }
 }

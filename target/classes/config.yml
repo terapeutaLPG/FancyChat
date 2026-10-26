@@ -22,6 +22,16 @@ ranks:
     prefix: "&e[VIP] "
     name-color: "&e"
     message-color: "&f"
+  Budowniczy:
+    prefix: "&2⛏ &a[BUDOWNICZY] &r"
+    name-color: ""
+    message-color: "&f"
+    # Gradient nicku w kolorach hex (#RRGGBB): zielony -> niebieski -> fioletowy.
+    # Wymaga MC 1.16+. Jezeli gradient-start i gradient-end sa ustawione,
+    # zamiast name-color uzywany jest gradient.
+    gradient-start: "#3AFF5C"
+    gradient-mid: "#3AA0FF"
+    gradient-end: "#A64DFF"
   Gracz:
     prefix: "&7[GRACZ] "
     name-color: "&7"
@@ -29,6 +39,12 @@ ranks:
 
 # Ranga domyslna nadawana graczom bez zadnego uprawnienia fancychat.rank.<nazwa>.
 # Musi pasowac do jednej z rang powyzej (wielkosc liter ma znaczenie).
+# Uprawnienie wpisz malymi literami, np. fancychat.rank.budowniczy dla rangi Budowniczy.
+#
+# Przypisanie rangi do grupy LuckPerms (grupa musi miec to uprawnienie):
+#   /lp group builder permission set fancychat.rank.budowniczy true
+# lub dla konkretnego gracza:
+#   /lp user <nick> permission set fancychat.rank.budowniczy true
 default-rank: Gracz
 
 # Komunikaty pluginu (mozesz uzywac kodow &).
