@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashSet;
@@ -13,10 +14,21 @@ import java.util.UUID;
 public class FancyChat extends JavaPlugin {
 
     private final Set<UUID> adminChatToggled = new HashSet<>();
+    private net.luckperms.api.LuckPerms luckPerms;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        if (getServer().getPluginManager().getPlugin("LuckPerms") != null) {
+            RegisteredServiceProvider<net.luckperms.api.LuckPerms> provider =
+                    getServer().getServicesManager().getRegistration(net.luckperms.api.LuckPerms.class);
+            if (provider != null) {
+                luckPerms = provider.getProvider();
+                getLogger().info("Polaczono z LuckPerms - mapowanie grup czatu aktywne.");
+            }
+        } else {
+            getLogger().info("LuckPerms nie znaleziony - uzywam tylko uprawnien fancychat.rank.*");
+        }
         getServer().getPluginManager().registerEvents(new ChatListener(this), this);
     }
 
@@ -89,6 +101,21 @@ public class FancyChat extends JavaPlugin {
 
     /** Znajduje range gracza po uprawnieniu fancychat.rank.<nazwa>, inaczej range domyslna. */
     String getRank(Player player) {
+        // 1) Mapowanie grup LuckPerms na rangi (sekcja lp-ranks w configu).
+        ConfigurationSection lpRanks = getConfig().getConfigurationSection("lp-ranks");
+        if (lpRanks != null && luckPerms != null) {
+            net.luckperms.api.model.user.User user =
+                    luckPerms.getUserManager().getUser(player.getUniqueId());
+            if (user != null) {
+                String lpGroup = user.getPrimaryGroup();
+                String mapped = lpRanks.getString(lpGroup);
+                if (mapped != null && getConfig().getConfigurationSection("ranks") != null
+                        && getConfig().getConfigurationSection("ranks").contains(mapped)) {
+                    return mapped;
+                }
+            }
+        }
+        // 2) Uprawnienia fancychat.rank.<nazwa>.
         ConfigurationSection ranks = getConfig().getConfigurationSection("ranks");
         if (ranks == null) return null;
         for (String rank : ranks.getKeys(false)) {

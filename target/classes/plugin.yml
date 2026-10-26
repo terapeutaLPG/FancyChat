@@ -3,6 +3,7 @@ version: 1.0
 main: pl.fancychat.FancyChat
 api-version: "1.16"
 author: FancyChat Team
+softdepend: [LuckPerms]
 description: Plugin na rangi czatu, kolorowe wiadomosci i admin chat.
 
 commands:

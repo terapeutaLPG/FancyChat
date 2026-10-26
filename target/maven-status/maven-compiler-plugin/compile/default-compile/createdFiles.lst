@@ -1,3 +1,4 @@
 pl\fancychat\FancyChat.class
 pl\fancychat\ChatListener.class
+pl\fancychat\GradientUtil.class
 pl\fancychat\ChatColorCompat.class

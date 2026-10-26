@@ -40,12 +40,14 @@ ranks:
 # Ranga domyslna nadawana graczom bez zadnego uprawnienia fancychat.rank.<nazwa>.
 # Musi pasowac do jednej z rang powyzej (wielkosc liter ma znaczenie).
 # Uprawnienie wpisz malymi literami, np. fancychat.rank.budowniczy dla rangi Budowniczy.
-#
-# Przypisanie rangi do grupy LuckPerms (grupa musi miec to uprawnienie):
-#   /lp group builder permission set fancychat.rank.budowniczy true
-# lub dla konkretnego gracza:
-#   /lp user <nick> permission set fancychat.rank.budowniczy true
 default-rank: Gracz
+
+# Mapowanie grup LuckPerms na rangi FancyChat.
+# Graczowi w danej grupie LP (jej primary group) zostanie nadana podana ranga czatu.
+# Przyklad ponizej: kazdy, kogo glowna grupa w LuckPerms to tylko_wand,
+# bedzie mial na czacie range Budowniczy. Dodaj wlasne linie wg potrzeb.
+lp-ranks:
+  tylko_wand: Budowniczy
 
 # Komunikaty pluginu (mozesz uzywac kodow &).
 messages:
