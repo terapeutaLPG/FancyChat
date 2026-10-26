@@ -1,0 +1,28 @@
+name: FancyChat
+version: 1.0
+main: pl.fancychat.FancyChat
+api-version: "1.16"
+author: FancyChat Team
+description: Plugin na rangi czatu, kolorowe wiadomosci i admin chat.
+
+commands:
+  fancychat:
+    description: Zarzadzanie pluginem FancyChat.
+    usage: /fancychat reload
+    permission: fancychat.admin
+    aliases: [fc]
+  achat:
+    description: Wiadomosc na kanale administracyjnym.
+    usage: /achat <wiadomosc> | /achat toggle
+    aliases: [a]
+
+permissions:
+  fancychat.admin:
+    description: Administracja pluginem FancyChat (reload).
+    default: op
+  fancychat.color:
+    description: Pozwala uzywac kodow kolorow & w wiadomosciach.
+    default: op
+  fancychat.adminchat:
+    description: Pozwala widziec i pisac na admin chacie.
+    default: op

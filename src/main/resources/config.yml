@@ -1,0 +1,39 @@
+# =====================================================
+#  FancyChat - konfiguracja pluginu
+# =====================================================
+
+# Format czatu: [prefix] Nick: wiadomosc
+# W prefixach i kolorach uzywaj kodow & (np. &c, &l, &r).
+
+# Czy wiadomosc powitalna i inne komunikaty maja byc pokazywane? (na razie zarezerwowane)
+debug: false
+
+# Lista rang - kolejnosc ma znaczenie (pierwsza pasujaca ranga wygrywa).
+ranks:
+  Admin:
+    prefix: "&c[ADMIN] "
+    name-color: "&c"
+    message-color: "&f"
+  Mod:
+    prefix: "&9[MOD] "
+    name-color: "&9"
+    message-color: "&f"
+  VIP:
+    prefix: "&e[VIP] "
+    name-color: "&e"
+    message-color: "&f"
+  Gracz:
+    prefix: "&7[GRACZ] "
+    name-color: "&7"
+    message-color: "&f"
+
+# Ranga domyslna nadawana graczom bez zadnego uprawnienia fancychat.rank.<nazwa>.
+# Musi pasowac do jednej z rang powyzej (wielkosc liter ma znaczenie).
+default-rank: Gracz
+
+# Komunikaty pluginu (mozesz uzywac kodow &).
+messages:
+  no-permission: "&cNie masz uprawnien do tej komendy!"
+  config-reloaded: "&aKonfiguracja FancyChat zostala przeladowana!"
+  adminchat-enabled: "&aTryb admin chatu wlaczony - wszystko co napiszesz pojdzie do adminow."
+  adminchat-disabled: "&cTryb admin chatu wylaczony."
